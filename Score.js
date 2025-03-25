@@ -15,6 +15,7 @@ export default class Score {
     this.ctx = ctx;
     this.canvas = ctx.canvas;
     this.scaleRatio = scaleRatio;
+    this.scores = []
   }
 
   /**
@@ -64,5 +65,24 @@ export default class Score {
   }
 
   // Funkce pro uložení skóre do LocalStorage
+
+
+  saveScore() {
+    const score = this.score.toFixed(0)
+    this.scores.push(score)
+    this.scores = this.scores.sort()
+    localStorage.setItem("scores", this.scores)
+
+    console.log(this.scores)
+    console.log(localStorage.getItem("scores"))
+    const scoresDiv = document.getElementById("scores")
+    scoresDiv.innerHTML = "";
+    const count = this.scores.length < 10 ? this.scores.length : 10;
+    for (let i = 0; i < count; i++) {
+      const tag = document.createElement("p");
+      tag.innerHTML = this.scores[this.scores.length - 1 - i];
+      scoresDiv.appendChild(tag);
+    }
+  }
 
 }

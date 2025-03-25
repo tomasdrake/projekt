@@ -221,6 +221,7 @@ function gameLoop(currentTime) {
   if (!gameOver && cactiController.collideWith(player)) {
     gameOver = true;
     setupGameReset();
+    score.saveScore();
     score.setHighScore();
   }
 
